@@ -1,0 +1,88 @@
+<!DOCTYPE html><html>	<head>		<meta charset="UTF-8">		<title></title>		<link rel="stylesheet" type="text/css" href="../css/inForMation.css" />		<link rel="stylesheet" type="text/css" href="../css/base.css" />		<link rel="stylesheet" type="text/css" href="../css/homepage.css" />		<link rel="stylesheet" type="text/css" href="../svg/font.css"/>	</head>	<body>		<div class="centerLeft">			<div class="logo">				<img src="../img/LOGO.png" />			</div>			<ul>				<li>					<a href="homepage.html">首页</a>				</li>				<li>					<a href="Jindex.html">员工信息管理</a>				</li>				<li>					<a href="Personnel.html">人事变动</a>				</li>				<li>					<a href="recycle.html">回收站</a>				</li>				<li>					<a href="help.html">帮助</a>				</li>			</ul>		</div>		<div class="dahezi" style="overflow: auto;width: calc(100vw-130px);height: calc(100vh-90px);">			<div class="centerRight">				<div class="logo">					<div class="weather">						<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=5"></iframe>					</div>					<div class="search_cen">												<marquee scrollTop="0"  onmouseover=this.stop() onmouseout=this.start()>						<span>公告</span>						<a href="http://news.sina.com.cn/society">最近新闻动态</a>					</marquee>					</div>					<div class="Administrator">						<div class="header_p" id="header_p">							<img src="../img/d4.jpg" />						</div>						<div class="menu_control">														<p class="menu">管理员<img src="../img/up.png" id="alter" /></p>							<ul class="submenu">								<li><i class="icon-user-plus"></i><span>管理员信息</span></li>								<li id="switchover"><i class="icon-tab"></i><span>切换用户</span></li>								<li><i class="icon-switch"></i><span>退出</span></li>							</ul>						</div>					</div>					<div class="right_add">+</div>				</div>				<div class="staff" id="staff1">					<div class="employee">						<p>员工基本信息</p>						<a href="javascript:;">展开<span>▼</span></a>					</div>										<div class="left">						<div class="emend_img" style="width: 100%;height: 100%;">							<img src="../img/upload.png" />						</div>						<p class="emend">上传头像</p>						<input type="file" id="left_file" onChange="setFiles(this)" style="display: none;"/>											</div>										<div class="right">						<div class="name" style="margin-top: 20px;">							<p><span>姓名</span><input type="text" id="name"/></p>							<p><span>性别</span><input type="text" id="sex"/></p>							<p><span>年龄</span><input type="text" id="age"/></p>							<p><span>电话</span><input type="text" id="tel"/></p>						</div>						<div class="name">							<p><span>婚姻状况</span><input type="text" id="matrimonialRes"/></p>							<p><span>家庭电话</span><input type="text" id="familyTel"/></p>							<p><span>邮箱</span><input type="text" id="eml"/></p>							<p><span>QQ</span><input type="text" id="QQ"/></p>						</div>						<div class="name">							<p><span>学历</span><input type="text" id="qualificAtions"/></p>							<p><span>专业</span><input type="text" id="specialities"/></p>							<p id="card" style="margin: 0;"><span style="float: left;width: 74px;">身份证号</span><input type="text" id="number"/></p>						</div>						<div class="name">							<p><span>毕业院校</span><input type="text" style="text-indent: 10px;"id="Graduation"/></p>							<p id="address"><span>家庭住址</span><input type="text" class="address"/></p>						</div>					</div>					<div style="clear: both;"></div>					<a href="javascript:;" class="preservation">保存</a>									</div>				<div class="staff" id="staff" style="height:60px;">					<div style="clear: both;"></div>					<div class="employee">						<p>员工在职信息</p>						<a href="javascript:;">收起<span>▲</span></a>					</div>					<div class="department">						<p><span>所在部门</span>							<select name="" class="sel" id="selBm">								<option value="s">市场部</option>								<option value="r">人事部</option>								<option value="c">财务部</option>								<option value="j">技术部</option>							</select>						</p>						<p><span>工号</span>							<input type="text" class="ghInp"/>						</p>						<p><span>职位</span>							<input type="text" class="zwInp"/>						</p>						<p><span>在职状态</span>							<select name="" class="sel" id="selState">								<option value="1">实习</option>								<option value="2">转正</option>								<option value="3">升迁</option>								<option value="4">离职</option>								<option value="5">退休</option>							</select>						</p>						<p><span>离职时间</span>							<input type="text" class="leavedate"/>						</p>						<p><span>入职时间</span>							<input type="text" class="entryTime"/>						</p>											</div>				</div>			</div>		</div>				<div class="header_z">			<asid class="login">				<div>					<i id="loginClose" class="icon-cross"></i>				</div>				<form>					<lable>账号<input type="text" /></lable>					<lable>密码<input type="text" /></lable>					<p>						<label><input type="checkbox" />自动登陆</label>						<a>删除账号</a>						<a>注册账号</a>					</p>					<button>登陆</button>				</form>			</asid>		</div>				<div class="control_mask">			<div class="control_message">				<div class="leftbar">					<i id="controlClose" class="icon-cross"></i>					<div class="tx">						<i class="icon-user"></i>					</div>					<input type="file" id="file_tx" />					<button id="submit_tx">提交头像</button>					<span>* 点击图片添加头像</span>				</div>			</div>		</div>	</body>
+	<script src="../js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../js/public.js"></script>
+	<script type="text/javascript">
+		var cdBool=true;
+		$('.employee a').click(function(){
+			if(cdBool){
+				$(this).parents('#staff1').stop().animate({'height':'60px'},800)
+				$(this).parents('#staff').stop().animate({'height':'60px'},800)
+				$(this).html('收起<span>▲</span>')
+				cdBool=false;
+			}else if(cdBool==false){
+				$(this).parents('.staff').stop().animate({'height':'450px'},800)
+				$(this).parents('#staff').stop().animate({'height':'300px'},800)
+				$(this).html('展开<span>▼</span>')
+				cdBool=true
+			}
+			
+		})
+		var files;
+		var setFiles=function(element){
+		//alert(1)
+			
+			console.log(element.files)
+			files=element.files[0]
+		}
+	$('.preservation').click(function(){
+	
+		var fd=new FormData();
+		fd.append('uploadedFile',files);
+		$.ajax({
+			type:"post",
+			url:"http://192.168.43.197:8005/operate/up",
+			async:true,
+			data:fd,
+			contentType:false,
+			processData:false,
+			success:function(data){
+				console.log(data)
+				$.ajax({
+					type:"post",
+					url:"http://192.168.43.197:8005/operate/add",
+					data:{
+						name:$('#name').val(),
+						sex:$('#sex').val(),
+						age:$('#age').val(),
+						img:data,
+						numBer:$('#number').val(),
+						tel:$('#tel').val(),
+						familyTel:$('#familyTel').val(),
+						eml:$('#eml').val(),
+						QQ:$('#QQ').val(),
+						address:$('.address').val(),
+						matrimonialRes:$('#matrimonialRes').val(),
+						specialities:$('#specialities').val(),
+						Graduation:$('#Graduation').val(),
+						qualificAtions:$('#qualificAtions').val(),
+						posiTion:$('.zwInp').val(),
+						workNumber:$('.ghInp').val(),
+						leavedate:$('.leavedate').val(),
+						entryTime:$('.entryTime').val(),
+						department:$('#selBm').val(),
+						state:$('#selState').val()
+					},
+					async:true,
+					success:function(addData){
+						console.log(addData)
+						if(addData.flag==1){
+							alert('添加成功')
+							location.href="Jindex.html"
+						}else{
+							alert('添加失败')
+						}
+					},
+					error:function(){
+						alert('失败')
+					}
+				});
+			},
+			error:function(){
+				alert('添加失败')
+			}
+		})
+	})
+	</script>
+	
+
+</html>

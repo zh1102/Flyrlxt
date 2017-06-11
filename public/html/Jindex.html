@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head>	<meta charset="UTF-8">	<title>Document</title>	<link rel="stylesheet" type="text/css" href="../css/homepage.css"/>	<link rel="stylesheet" type="text/css" href="../svg/font.css"/>	<link rel="stylesheet" type="text/css" href="../css/Jindex.css">	<link rel="stylesheet" type="text/css" href="../css/reset.css">	</head><body>	<div class="centerLeft">				<div class="logo">				<img src="../img/LOGO.png"/>			</div>			<ul>				<li>					<a href="homepage.html">首页</a>				</li>				<li style="background: #5093E1;">					<a href="Jindex.html">员工信息管理</a>				</li>				<li>					<a href="Personnel.html">人事变动</a>				</li>				<li>					<a href="recycle.html">回收站</a>				</li>				<li>					<a href="help.html">帮助</a>				</li>			</ul>	</div>	<div class="centerRight">		<div class="logo">									<div class="weather">					<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=5"></iframe> 				</div>				<div class="search_cen">					<input type="search" name="search" id="search" value=""/><label for="search" class="icon-search"></label>				</div>								<div class="Administrator">					<div class="header_p" id="header_p">						<img src="../img/d4.jpg"/>					</div>										<div class="menu_control">												<p class="menu">管理员<img src="../img/up.png" id="alter"/></p>						<ul class="submenu">														<li><i class="icon-user-plus"></i><span>管理员信息</span></li>							<li id="switchover"><i class="icon-tab"></i><span>切换用户</span></li>							<li id="quit"><i class="icon-switch"></i><span>退出</span></li>													</ul>					</div>				</div>				<div class="right_add">+</div>		</div>		<div class="content">			<div class="nav">				<ul>					<li>相片</li>					<li>姓名</li>					<li>性别</li>					<li id="department">部门					</li>					<li id="working">职称</li>					<li>操作</li>				</ul>			</div>			<div class="detail">				<ul id="oul"></ul>			</div>		</div>				<div class="page">			<div id="pagecount"></div>		</div>	</div>			<div class="header_z">			<asid class="login">				<div>					<i id="loginClose" class="icon-cross"></i>				</div>				<form>					<lable>账号<input type="text" /></lable>					<lable>密码<input type="password" /></lable>										<button>登陆</button>				</form>			</asid>		</div>				<div class="control_mask">			<div class="control_message">								<div class="leftbar">					<i id="controlClose" class="icon-cross"></i>					<div class="tx">						<i class="icon-user"></i>					</div>					<input type="file" id="file_tx"/>					<button id="submit_tx">提交头像</button>					<span>* 点击图片添加头像</span>				</div>							</div>		</div>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/public.js"></script>
+<script type="text/javascript">
+$('#department').hover(function(){
+	$('#department ul').css('display','block');
+},function(){
+	$('#department ul').css('display','none');
+})
+
+$('#working').hover(function(){
+	$('#working ul').css('display','block');
+},function(){
+	$('#working ul').css('display','none');
+})
+// 输入参数需要当前页码pageNo，总页码totalPage，回调函数callback
+var curPage = 1; //当前页面
+var total,pageSize,totalPage;
+function ajaxPage(page){
+	var delstate=0;
+	$.ajax({
+		type:'post',
+		url:'http://192.168.43.197:8005/index/page',
+		data:{
+			pageNum:page,
+			delstate:delstate
+		},
+		success:function(e){
+				var html = '';
+				total = e.total; //总计数
+				pageSize = e.pageSize; //每页显示条数
+				curPage = page; //当前页
+				totalPage = e.totalPage;//总页数;
+				 $('#oul').empty();   //清空
+				for(var i = 0;i<e.list.length;i++){
+					if(e.list[i].department=='r'){
+						e.list[i].department='人事部';
+					}else if(e.list[i].department=='s'){
+						e.list[i].department='市场部'
+					}else if(e.list[i].department=='c'){
+						e.list[i].department='财务部'
+					}else if(e.list[i].department=='j'){
+						e.list[i].department='技术部'
+					}
+					html += '<li><div class="bar"><img src="http://192.168.43.197:8005/upload/'+e.list[i].img+'" alt=""></div>'
+						+'<span>'+e.list[i].name+'</span><span>'+e.list[i].sex+'</span>'
+						+'<span><b>'+e.list[i].department+'</b></span>'
+						+'<span>'+e.list[i].zy+'</span>'
+						+'<span><a href="detail.html?id='+e.list[i].id+'" style="color:#4a83c7">查看&nbsp;</a>'
+						+'<a href="modification.html?id='+e.list[i].id+'" style="color:#eb6100;">修改</a>'
+						+'<a href="javascript:;" class="del" del="'+e.list[i].id+'" style="color:#b6b6b6;">&nbsp;删除</a></span></li>';
+				};
+				$('#oul').append(html);
+		},
+		complete:function(){
+			getPageBar();
+			del();
+		}
+		,error:function(){
+			alert('error')
+		}
+	})
+}
+// 函数调用
+ajaxPage(1)
+// 分页调用	
+function fn(page){
+    if(page){
+        ajaxPage(page);
+    }
+}
+// 删除函数		
+function del(){
+	var delstate;
+	$('.del').click(function(){
+		var delid=$(this).attr('del');
+		delstate=1;
+		var This=$(this);
+		$.ajax({
+			type:"post",
+			url:"http://192.168.43.197:8005/operate/delete",
+			async:true,
+			data:{
+				delid:delid,
+				delstate:delstate
+			},
+			success:function(e){
+				console.log(e)
+				if(e.flag==1){
+					alert('删除成功')
+					This.parents('li').remove();
+					location.reload();
+				}else if(e.flag==2){
+					alert('删除失败')
+				}
+			},
+			error:function(){
+				alert('失败')
+			}
+		});
+	})
+}
+//获取分页条 
+function getPageBar(){
+	//页码大于最大页数
+	if(curPage>totalPage) curPage = totalPage;
+	//页码小于1
+	if(curPage < 1) curPage = 1;
+	pageStr = '<span>共'+total+'条</span><span>'+curPage+'/'+totalPage+'</span>';
+	 //如果是第一页
+    if(curPage==1){
+        pageStr += "<span>首页</span><span>上一页</span>";
+    }else{
+        pageStr += "<span><a href='javascript:void(0)' onclick='fn(1)'>首页</a></span><span><a href='javascript:void(0)' onclick='fn("+(curPage-1)+")'>上一页</a></span>";
+    }
+
+    //如果是最后页
+    if(curPage>=totalPage){
+        pageStr += "<span>下一页</span><span>尾页</span>";
+    }else{
+        pageStr += "<span><a href='javascript:void(0)' onclick='fn("+(parseInt(curPage)+1)+")'>下一页</a></span><span><a href='javascript:void(0)' onclick='fn("+totalPage+")'>尾页</a></span>";
+    }
+
+    $("#pagecount").html(pageStr);
+}
+	</script>
+</body>
+</html>
